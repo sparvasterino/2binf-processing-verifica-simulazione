@@ -34,7 +34,7 @@ class Personaggio {
   PShape personaggio;
   float x, y;
   float step = 5;
-  PShape shape;
+  //PShape shape; //Devi levare questa shape
   void disegna() {
     shape(personaggio, x, y);
     personaggio.setFill(color(255, 0, 0));
@@ -48,14 +48,14 @@ class Personaggio {
     }
   }
   void spasmi() {
-    shape.resetMatrix();
-    shape.rotateY(radians(90));
+    personaggio.resetMatrix(); //Ti crasha qui perchè "shape" ha valore null. devi usare la PShape "personaggio"
+    personaggio.rotateY(radians(90));
     this.x += 5;
   }
-  void confundo() { 
-    shape.resetMatrix();
-    shape.rotateX(radians(random(360)));
-    shape.rotateY(radians(random(360)));
+  void confundo() { //La stessa cosa di sopra qui
+    personaggio.resetMatrix();
+    personaggio.rotateX(radians(random(360)));
+    personaggio.rotateY(radians(random(360)));
   }
 }
 
