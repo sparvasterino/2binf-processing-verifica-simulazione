@@ -1,20 +1,21 @@
 
 
-//int ronStep = 5; //Lo mettiamo nella classe, quindi non serve più
+
 Edificio castle;
 Personaggio ron;
-
 
 void setup() {
   fullScreen(P3D);
   castle = new Edificio();
   ron = new Personaggio();
   castle.edificio = loadShape("castle.obj"); 
-  castle.x = 100; //Assegnamo il valore alle posizioni
-  castle.y = 200;
+  castle.x = width *0.9; //Assegnamo il valore alle posizioni
+  castle.y = height *0.5;
+
   ron.personaggio = loadShape("ron.obj");
-  ron.x = 300;
-  ron.y = 400;
+
+  ron.x = width *0.1;
+  ron.y = height *0.5;
 }
 
 void draw() {
@@ -22,7 +23,7 @@ void draw() {
   lights();
 
   castle.disegna(); //Abbiamo le posizioni nella classe
-  
+
   ron.muovi();
   ron.disegna(); //Abbiamo le posizioni nella classe
 }
@@ -31,15 +32,22 @@ void draw() {
 class Personaggio {
   PShape personaggio;
   float x, y; //Creiamo le variabili
-  float step;
-  
+  float step = 5;
+  PShape shape;
   void disegna() {
     shape(personaggio, x, y); //Le usiamo per disegnare
+    personaggio.setFill(color(255, 0, 0));
   }
-  
-  void muovi(){ //Intanto cominciamo così
+
+  void muovi() { //Intanto cominciamo così
     if (x < width * 0.9) { //è il 90%
-      x += step;
+      x = x + step;
+      if (x > width * 0.9) 
+        step = 0;
+      void confundo() {
+        shape.rotateX(radians(random(360)));
+        shape.rotateY(radians(random(360)));
+      }
     }
   }
 }
@@ -47,10 +55,8 @@ class Personaggio {
 class Edificio {
   PShape edificio;
   float x, y;
-  
+
   void disegna() {
     shape(edificio, x, y); //Stesso lavoro qui!
   }
 }
-
-//Scusa se ho cancellato i numeri originali
