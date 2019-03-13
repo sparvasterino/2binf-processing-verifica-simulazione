@@ -21,7 +21,7 @@ void draw() {
 
   castle.disegna();
 
-  if (mousePressed){ //Qualcosa del genere
+  if (mousePressed) { //Qualcosa del genere
     ron.confundo();
   } else {
     ron.muovi();
@@ -47,8 +47,13 @@ class Personaggio {
         step = 0;
     }
   }
-  
-  void confundo() { //non puoi mettere una funzione denyùtro ad unaltra funzione
+  void spasmi() {
+    shape.resetMatrix();
+    shape.rotateY(radians(90));
+    this.x += 5;
+  }
+  void confundo() { 
+    shape.resetMatrix();
     shape.rotateX(radians(random(360)));
     shape.rotateY(radians(random(360)));
   }
